@@ -2,8 +2,9 @@ import { useRef, useState } from 'react';
 import ExpenseInput from './expense-input';
 import ExpenseButton from './expense-button';
 import ExpenseToggle from './expense-toggle';
-import { IExpense } from '../../types';
+import { IExpense } from '@server/types';
 import { validateFormData } from '../../utils/formData';
+import expensesService from '../../services/expenses';
 
 interface Props {
   addExpense: (expense: IExpense) => void;
@@ -31,7 +32,11 @@ export default function ExpenseForm({ addExpense }: Props) {
       throw new Error('Form Data Invalid');
     }
 
-    addExpense({ ...formState, price: formState.price * 100 });
+    const newExpense = { ...formState, price: formState.price * 100 };
+
+    expensesService.create(newExpense);
+
+    addExpense(newExpense);
 
     setFormState({
       date: '',

@@ -1,8 +1,8 @@
-import { IExpense } from '../types';
+import { IExpense } from '@server/types';
 
 const baseUrl = 'http://localhost:3000/api/expenses';
 
-export const getAll = async (): Promise<IExpense[]> => {
+const getAll = async (): Promise<IExpense[]> => {
   const res = await fetch(baseUrl);
 
   if (!res.ok) {
@@ -12,9 +12,12 @@ export const getAll = async (): Promise<IExpense[]> => {
   return res.json() as Promise<IExpense[]>;
 };
 
-export const create = async (expense: IExpense): Promise<IExpense> => {
+const create = async (expense: IExpense): Promise<IExpense> => {
   const res = await fetch(baseUrl, {
     method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
     body: JSON.stringify(expense),
   });
 
@@ -24,3 +27,5 @@ export const create = async (expense: IExpense): Promise<IExpense> => {
 
   return res.json() as Promise<IExpense>;
 };
+
+export default { getAll, create };

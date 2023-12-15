@@ -1,7 +1,8 @@
-import express from 'express';
+import app from './app';
+import { config } from './utils';
 
-const app = express();
+const PORT = config.PORT ?? 3000;
 
-app.listen(3000, () => {
-  console.log('Server listening at port 3000');
+app.listen(PORT, () => {
+  console.log(`Server listening at port ${PORT}`);
 });

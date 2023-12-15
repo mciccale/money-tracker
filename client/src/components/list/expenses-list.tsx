@@ -1,4 +1,4 @@
-import { IExpense } from '../../types';
+import { IExpense } from '@server/types';
 import ExpenseListItem from './expense-list-item';
 
 interface Props {

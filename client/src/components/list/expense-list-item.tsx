@@ -1,4 +1,4 @@
-import { IExpense } from '../../types';
+import { IExpense } from '@server/types';
 
 interface Props {
   expense: IExpense;
